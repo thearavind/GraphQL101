@@ -14,10 +14,6 @@ const jwtMiddleware = jwt({
     secret: process.env.JWT_SECRET
 })
 
-/* router.post('/graphql', jwtMiddleware, async (ctx) => {
-    ctx.body = {status: 200, payload: [{message: 'GraphQL route implemented'}]}
-}) */
-
 const fetchUser = (id) => {
     try {
         return db.students.find({where: id})
