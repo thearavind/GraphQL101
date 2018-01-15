@@ -8,7 +8,7 @@ import db from '../models/db'
 const router = new Router()
 
 router.post('/login', async (ctx) => {
-    let user = await db.employee.find({where: {email_id: ctx.request.body.email_id}})
+    let user = await db.students.find({where: {email_id: ctx.request.body.email_id}})
     if (user) {
         let validPass = await bcrypt.compare(ctx.request.body.password, user.password_hash)
         if (validPass) {
@@ -22,14 +22,14 @@ router.post('/login', async (ctx) => {
 })
 
 router.post('/register', async (ctx) => {
-    let employee = await db.employee.find({
+    let employee = await db.students.find({
         where: {email_id: ctx.request.body.email_id}
     })
     if (employee) {
         ctx.body = {status: 409, payload: [{message: 'User already exist'}]}
     } else {
         let hash = await bcrypt.hash(ctx.request.body.password, 10)
-        let newOwner = await db.employee.create({
+        let newOwner = await db.students.create({
             username: ctx.request.body.username,
             email_id: ctx.request.body.email_id,
             sex: ctx.request.body.sex,
