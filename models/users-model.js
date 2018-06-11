@@ -1,22 +1,28 @@
 'use strict'
 
 export default (sequelize, DataTypes) => {
-    return sequelize.define('students', {
+    return sequelize.define('users', {
         _id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        student_name: {
+        user_name: {
             type: DataTypes.STRING(50),
             required: true,
+            allowNull: false
+        },
+        role: {
+            type: DataTypes.ENUM,
+            required: true,
+            values: ['student', 'admin'],
             allowNull: false
         },
         sex: {
             type: DataTypes.ENUM,
             required: true,
-            values: ['M', 'F']
-
+            values: ['M', 'F'],
+            allowNull: false
         },
         department: {
             type: DataTypes.STRING(50),
@@ -37,6 +43,11 @@ export default (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             required: true,
             allowNull: false
+        },
+        refresh_token: {
+            type: DataTypes.STRING,
+            required: false,
+            allowNull: true
         }
     })
 }

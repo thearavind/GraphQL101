@@ -19,9 +19,12 @@
     "koa-bodyparser": "^4.2.0",
     "koa-graphql": "^0.7.3",
     "koa-jwt": "^3.3.0",
+    "koa-passport": "^4.0.1",
     "koa-req-validator": "^0.2.1",
     "koa-router": "^7.3.0",
     "mysql2": "^1.5.1",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
     "sequelize": "^4.29.0"
   },
   "devDependencies": {

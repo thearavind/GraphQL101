@@ -1,21 +1,21 @@
 'use strict'
 
 import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } from 'graphql'
-import studentType from './student-schema'
+import userType from './user-schema'
 import bookType from './book-schema'
 
 export default new GraphQLObjectType({
-    name: 'fetch_student_and_book',
-    description: 'Fetch the students and books from DB',
+    name: 'fetch_user_and_book',
+    description: 'Fetch the users and books from DB',
     fields: () => ({
-        student: {
-            type: studentType,
+        user: {
+            type: userType,
             args: {
                 email_id: {
                     type: GraphQLString,
                     default_value: () => null
                 },
-                student_id: {
+                user_id: {
                     type: GraphQLInt,
                     default_value: () => null
                 },
@@ -23,7 +23,7 @@ export default new GraphQLObjectType({
                     type: GraphQLString,
                     default_value: () => null
                 },
-                student_name: {
+                user_name: {
                     type: GraphQLString,
                     default_value: () => null
                 }

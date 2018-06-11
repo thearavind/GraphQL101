@@ -3,14 +3,14 @@
 import { GraphQLObjectType, GraphQLInt, GraphQLString } from 'graphql'
 
 export default new GraphQLObjectType({
-    name: 'student',
-    description: 'Schema of the student object',
+    name: 'user',
+    description: 'Schema of the user object',
 
     fields: () => ({
-        student_name: {
+        user_name: {
             type: GraphQLString,
             resolve: user =>
-                user.student_name
+                user.user_name
         },
         _id: {
             type: GraphQLInt,
@@ -31,6 +31,16 @@ export default new GraphQLObjectType({
             type: GraphQLString,
             resolve: user =>
                 user.email_id
+        },
+        role: {
+            type: GraphQLString,
+            resolve: user =>
+                user.role
+        },
+        refresh_token: {
+            type: GraphQLString,
+            resolve: user =>
+                user.refresh_token
         }
     })
 })

@@ -16,7 +16,7 @@ const jwtMiddleware = jwt({
 
 const fetchUser = (id) => {
     try {
-        return db.students.find({where: id})
+        return db.users.find({where: id})
     } catch (e) {
         console.log('Error', e)
     }
@@ -32,12 +32,13 @@ const fetchBook = (id) => {
 
 const registerUser = async (id) => {
     try {
-        const oldUser = await db.students.find({where: {email_id: id.email_id}})
+        const oldUser = await db.users.find({where: {email_id: id.email_id}})
         if (!oldUser) {
             const hash = await bcrypt.hash(id.password, 10)
-            return db.students.create({
-                student_name: id.student_name,
+            return db.users.create({
+                user_name: id.user_name,
                 email_id: id.email_id,
+                role: id.role,
                 sex: id.sex,
                 designation: id.designation,
                 joined_date: id.joined_date,
@@ -54,10 +55,10 @@ const rentBook = async (req) => {
     try {
         const book = await db.books.find({where: {_id: req.book_id}})
         if (!book.rented) {
-            const hasBooks = await db.rent_history.findAll({where: {studentId: req.student_id, returned: false}})
+            const hasBooks = await db.rent_history.findAll({where: {usersId: req.user_id, returned: false}})
             if (hasBooks.length < 3) {
                 await db.rent_history.create({
-                    studentId: req.student_id,
+                    usersId: req.user_id,
                     bookId: req.book_id,
                     rented_days: req.days,
                     date: (new Date()).toISOString().substring(0, 10),

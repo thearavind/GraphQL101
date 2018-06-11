@@ -3,5 +3,5 @@
 import jwt from 'jsonwebtoken'
 
 export function JWTGenerator (id) {
-    return jwt.sign({id: id}, process.env.JWT_SECRET)
+    return jwt.sign({id: id}, process.env.JWT_SECRET, { expiresIn: 300 })
 }

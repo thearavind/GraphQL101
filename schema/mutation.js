@@ -1,7 +1,7 @@
 'use strict'
 
 import { GraphQLObjectType, GraphQLString, GraphQLEnumType, GraphQLNonNull, GraphQLInt } from 'graphql'
-import studentType from './student-schema'
+import userType from './user-schema'
 import bookType from './book-schema'
 
 const sexEnum = new GraphQLEnumType({
@@ -16,12 +16,24 @@ const sexEnum = new GraphQLEnumType({
     }
 })
 
+const roleEnum = new GraphQLEnumType({
+    name: 'roleEnum',
+    values: {
+        student: {
+            value: 'student'
+        },
+        admin: {
+            value: 'admin'
+        }
+    }
+})
+
 export default new GraphQLObjectType({
-    name: 'student_register',
-    description: 'Register a new student to the database',
+    name: 'user_register',
+    description: 'Register a new user to the database',
     fields: () => ({
-        createStudent: {
-            type: studentType,
+        createUser: {
+            type: userType,
             args: {
                 email_id: {
                     type: GraphQLString
@@ -29,7 +41,7 @@ export default new GraphQLObjectType({
                 department: {
                     type: GraphQLString
                 },
-                student_name: {
+                user_name: {
                     type: GraphQLString
                 },
                 password: {
@@ -40,6 +52,9 @@ export default new GraphQLObjectType({
                 },
                 sex: {
                     type: GraphQLNonNull(sexEnum)
+                },
+                role: {
+                    type: GraphQLNonNull(roleEnum)
                 }
             },
             resolve: (root, args, context) => context.userRegister.load({...args})
@@ -80,7 +95,7 @@ export default new GraphQLObjectType({
                 book_id: {
                     type: GraphQLInt
                 },
-                student_id: {
+                user_id: {
                     type: GraphQLInt
                 },
                 days: {
@@ -97,6 +112,23 @@ export default new GraphQLObjectType({
                 }
             },
             resolve: (root, args, context) => context.returnBook.load({...args})
+        },
+        login: {
+            type: userType,
+            args: {
+                refresh_token: {
+                    type: GraphQLString,
+                    default_value: () => null
+                },
+                email_id: {
+                    type: GraphQLString,
+                    default_value: () => null
+                },
+                password: {
+                    type: GraphQLString,
+                    default_value: () => null
+                }
+            }
         }
     })
 })

@@ -6,10 +6,14 @@ import bodyParser from 'koa-bodyparser'
 import authRoutes from './routes/auth-routes'
 import graphqlRoute from './routes/graphql-routes'
 import db from './models/db'
+import './passport-strategy'
+import passport from 'koa-passport'
 
 const app = new Koa()
 
 app.use(bodyParser())
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(authRoutes.routes())
 app.use(graphqlRoute.routes()).use(graphqlRoute.allowedMethods())
 
