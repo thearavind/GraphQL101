@@ -3,7 +3,7 @@ import { importSchema } from "graphql-import";
 import { GraphQLServer } from "graphql-yoga";
 import { createConnection } from "typeorm";
 import * as path from "path";
-import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv-safe';
 dotenv.config()
 
 import { resolvers } from "./resolvers";
@@ -18,3 +18,4 @@ createConnection()
   .catch((e) => {
     console.log('Unable to connect to the database', e)
   });
+  

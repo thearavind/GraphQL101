@@ -24,5 +24,5 @@ export class User extends BaseEntity {
 
   @Column("varchar", { length: 255 }) 
   username: string;
-
+  
 }

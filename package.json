@@ -1,19 +1,19 @@
 {
   "name": "GraphQL101",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:thearavind/GraphQL101.git",
-  "author": "thearavind <thearuvi@gmail.com>",
+  "main": "src/index.ts",
+  "repository": "git@github.com:Levitators/GraphQL101.git",
+  "author": "Levitators <https://github.com/Levitators>",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^6.0.0",
+    "dotenv-safe": "^6.0.0",
     "graphql-import": "^0.6.0",
     "graphql-yoga": "^1.14.7",
     "mysql": "^2.15.0",
     "typeorm": "^0.2.7"
   },
   "devDependencies": {
-    "@types/dotenv": "^4.0.3",
+    "@types/dotenv-safe": "^5.0.0",
     "@types/node": "^10.3.2",
     "gql2ts": "^1.8.0",
     "nodemon": "^1.17.5",
