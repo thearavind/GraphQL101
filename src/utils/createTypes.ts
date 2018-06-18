@@ -1,4 +1,3 @@
-
 import { generateNamespace } from "@gql2ts/from-schema";
 import * as fs from "fs";
 import * as path from "path";

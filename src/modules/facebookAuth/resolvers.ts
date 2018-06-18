@@ -22,10 +22,10 @@ export const resolvers: ResolverMap = {
     hello: (_, { name }) => `Bye ${name || "World"}`
   },
   Mutation: {
-    AuthenticateFacebookUser: async (_, {facebookToken}) => {
+    AuthenticateFacebookUser: async (_, { facebookToken }) => {
       const myUser = await getFacebookUserDetails(facebookToken)
-      const foundUser = await checkUserExsists(myUser.id, myUser.email)
-      if(foundUser.length) {
+      const foundUser = await checkUserExists(myUser.id, myUser.email)
+      if (foundUser.length) {
         // TODO Generate JWT token
       } else {
         // Create user and generate JWT token for that user
@@ -43,9 +43,9 @@ async function getFacebookUserDetails(facebookToken: string): Promise<FacebookUs
   }
 }
 
-async function checkUserExsists(facebookUserId: string, email: string): Promise<User[]> {
+async function checkUserExists(facebookUserId: string, email: string): Promise<User[]> {
   let foundUser = await facebookUser(facebookUserId)
-  if(!foundUser.length) {
+  if (!foundUser.length) {
     foundUser = await user(email)
   }
   return Promise.resolve(foundUser)
