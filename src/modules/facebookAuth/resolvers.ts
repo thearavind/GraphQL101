@@ -33,7 +33,7 @@ export const resolvers: ResolverMap = {
       try {
         const facebookUserDetails = await getFacebookUserDetails(facebookToken)
         const { id: facebookUserId, email, first_name: username } = facebookUserDetails
-        const foundUser = await checkUserExsists(facebookUserId, email)
+        const foundUser = await checkUserExists(facebookUserId, email)
         if(foundUser) {
           return Promise.resolve({
             auth_token: genToken(foundUser.id),
@@ -65,7 +65,7 @@ async function getFacebookUserDetails(facebookToken: string): Promise<FacebookUs
   }
 }
 
-async function checkUserExsists(facebookUserId: string, email: string): Promise<User | undefined> {
+async function checkUserExists(facebookUserId: string, email: string): Promise<User | undefined> {
   let foundUser = await facebookUser(facebookUserId)
   if(!foundUser) {
     foundUser = await user(email)
